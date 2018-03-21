@@ -48,13 +48,13 @@ public class MainClass {
         //Создаем вспомогательые панели верхнего блока
         Box topPane=Box.createVerticalBox();
         topPane.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
-        Box b0=Box.createHorizontalBox();
+        JPanel b0=new JPanel(new FlowLayout(FlowLayout.RIGHT));
         b0.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         Box b1=Box.createHorizontalBox();
         b1.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
 
         //Создаем элементы отображения информации (метку вывода выражения и табло калькулятора)
-        exprLb =new JLabel("Тестовая строка. Должна быть убрана");
+        exprLb =new JLabel("Тестовая строка. Должна быть убрана. Очень длинная тестовая строка. Но все равно должна быть рано или поздно убрана. Но сейчас надо испытать ее на очень длинные строки...");
         exprLb.setFont(new Font(null,Font.PLAIN,14));
         exprField =new JTextField();
         exprField.setText("Тестовый текст. Должен быть убран");
