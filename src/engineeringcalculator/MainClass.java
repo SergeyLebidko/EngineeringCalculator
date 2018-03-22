@@ -12,6 +12,10 @@ public class MainClass {
     private final int W=800;
     private final int H=400;
 
+    //Объекты, необходимые для работы с функциями и константами
+    private final Functions functions=new Functions();
+    private final Constants constants=new Constants();
+
     //Цветовые константы
     private final Color color1=new Color(215,215,215);
 
@@ -74,10 +78,12 @@ public class MainClass {
                 if(radOptionsBtn.isSelected()){
                     radOptionsBtn.setText("Rad");
                     radOptionsBtn.setToolTipText("Аргументы тригонометрических функций выражены в радианах");
+                    functions.setRadianEnabled(true);
                 }
                 if(!radOptionsBtn.isSelected()){
                     radOptionsBtn.setText("Grad");
                     radOptionsBtn.setToolTipText("Аргументы тригонометрических функций выражены в градусах");
+                    functions.setRadianEnabled(false);
                 }
             }
         });
@@ -100,6 +106,25 @@ public class MainClass {
 
         //Добавляем верхнюю панель в главное окно
         frm.add(topPane, BorderLayout.NORTH);
+
+        //Создаем элементы нижнего блока
+        Box bottomPane=Box.createHorizontalBox();
+        bottomPane.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
+        JPanel p0=new JPanel(new GridLayout(0,3));
+        JPanel p1=new JPanel(new GridLayout(4,5));
+
+        //Добавляем в интерфейс кнопки функций и констант
+        String[][] keys=functions.getFuncNames();
+        for (String[] r: keys){
+            p0.add(new JButton(r[0]));
+        }
+
+        //Собираем нижнюю панель
+        bottomPane.add(p0);
+        bottomPane.add(p1);
+
+        //Добавляем нижнюю панель в главное окно
+        frm.add(bottomPane, BorderLayout.CENTER);
 
         //Выводим окно на экран
         frm.setVisible(true);
