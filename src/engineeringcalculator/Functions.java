@@ -21,6 +21,11 @@ public class Functions {
         isRadianEnabled = opt;
     }
 
+    //Метод возвращает текущий способ интерпретации аргумента тригонометрических функций
+    public boolean isRadianEnabled() {
+        return isRadianEnabled;
+    }
+
     //Метод, возвращающий результат выполнения функции в зависимости от переданного имени и аргумента
     public double execute(String funcName, double x) throws Exception {
         funcName = funcName.toLowerCase();
