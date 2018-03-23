@@ -1,5 +1,6 @@
 package engineeringcalculator;
 
+//Класс необходим для реализации поддержки функций
 public class Functions {
 
     private boolean isRadianEnabled = true;    //Если равен true, то аргументы тригонометрических функций будут выражены в радианах

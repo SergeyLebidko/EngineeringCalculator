@@ -1,5 +1,6 @@
 package engineeringcalculator;
 
+//Класс необходим для реализации поддержки констант
 public class Constants {
 
     private String[][] constNames={
