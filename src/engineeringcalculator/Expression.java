@@ -15,29 +15,32 @@ public class Expression {
         calculator = new Calculator(functions, constants);
     }
 
-    //Метод служит для добавления элемента в выражение. Возвращает обновленное выражение
-    public String addToExpression(String s) throws Exception {
-        if(!s.equals("="))e+=s;              //Фиктивное добавление нового элемента в выражение
-        if(s.equals("="))e="1234567890";     //Фиктивное "вычисление" выражения
-        return e;
+    //Метод служит для добавления элемента в выражение
+    public void addToExpression(String s) {
+        e+=s;    //Фиктивное добавление элемента в выражение
     }
 
-    //Метод служит для удаления элемента из выражения. Возвращает обновленное выражение
-    public String removeFromExpression() {
+    //Метод служит для удаления элемента из выражения
+    public void removeFromExpression() {
         //Фиктивное удаление элемента из выражения
         if(e.length()>0){
             e=e.substring(0,e.length()-1);
         }
-        return e;
     }
 
-    @Override
-    public String toString() {
-        return e;    //Фиктивное преобразование выражения в строку
+    //Служит для вычисления значения выражения
+    public void calculateExpression() throws Exception{
+        e="123";    //Фиктивное вычисление выражения
     }
 
     //Метод служит для полной очистки выражения. Вызвращает пустую строку
     public void clear() {
         e="";    //Фиктивная очистка выражения
     }
+
+    @Override
+    public String toString() {
+        return e;    //Фиктивное преобразование выражения в строку
+    }
+    
 }

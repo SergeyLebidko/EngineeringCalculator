@@ -199,7 +199,7 @@ public class MainClass {
     private ActionListener actListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            toExpresion(e.getActionCommand());
+            toExpression(e.getActionCommand());
         }
     };
 
@@ -216,12 +216,12 @@ public class MainClass {
             if (e.getKeyChar() == 10) s = "=";       //Нажатие на клавишу Enter
             if (e.getKeyChar() == 127) s = "CE";     //Нажатие на клавишу Delete
             if (e.getKeyChar() == 8) s = "<<<";      //Нажатие на клавишу Backspace
-            toExpresion(s);
+            toExpression(s);
         }
     };
 
     //Метод служит для управления текущим выражением
-    private void toExpresion(String s) {
+    private void toExpression(String s) {
 
     }
 
