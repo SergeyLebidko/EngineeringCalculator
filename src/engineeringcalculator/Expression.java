@@ -52,29 +52,19 @@ public class Expression {
 
     //Возвращает тип переданного ему аргумента
     private int getTypeElement(String s){
-
         if(s.equals("_start"))return START;
-
         if(s.equals("("))return OPEN_BRACKET;
-
         if(s.equals(")"))return CLOSE_BRACKET;
-
         if(s.equals("-"))return MINUS;
-
         if("*+^/".contains(s) & (s.length()==1))return OPERATOR;
-
         if("0123456789.".contains(s) & (s.length()==1))return NUMBER;
-
         for (String[] f: functions.getFuncNames()){
             if (s.toLowerCase().equals(f[0]))return FUNC;
         }
-
         for (String[] c: constants.getConstNames()){
             if(s.toLowerCase().equals(c[0]))return CONST;
         }
-
         return UNKNOWN;
-
     }
 
     @Override
