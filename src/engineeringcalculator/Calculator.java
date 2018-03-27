@@ -11,4 +11,9 @@ public class Calculator {
         this.constants = constants;
     }
 
+    //Метод вычисляет переданное ему выражение
+    /*public double Calculate(){
+
+    }*/
+
 }

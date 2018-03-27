@@ -25,6 +25,9 @@ public class MainClass {
     //Объект-выражение
     private final Expression expression = new Expression(functions, constants);
 
+    //Последнее вычисленное значение. Если не равно null, то в поле ввода находится последнее вычисленное значение.
+    private String lastValue=null;
+
     //Цветовые константы
     private final Color color1 = new Color(98, 216, 230);
     private final Color color2 = new Color(157, 230, 137);
@@ -222,6 +225,51 @@ public class MainClass {
 
     //Метод служит для управления текущим выражением
     private void toExpression(String s) {
+
+        //Команда "очистить выражение"
+        if(s.equals("CE")){
+            expression.clear();
+            lastValue=null;
+            exprLb.setText(" ");
+            exprField.setText(expression.toString());
+            return;
+        }
+
+        //Удалить последний введенный элемент
+        if(s.equals("<<<")){
+            if(lastValue!=null){
+                exprLb.setText("ans="+lastValue);
+                lastValue=null;
+                expression.clear();
+            }
+            expression.removeFromExpression();
+            exprField.setText(expression.toString());
+            return;
+        }
+
+        //Команда "вычислить значение выражения"
+        if(s.equals("=")){
+            String str=expression.toString();
+            try {
+                expression.calculateExpression();
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(frm,e.getMessage(),"Ошибка",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            exprLb.setText(str+"=");
+            lastValue=expression.toString();
+            exprField.setText(expression.toString());
+            return;
+        }
+
+        //Добавление символа в выражение
+        if(lastValue!=null){
+            exprLb.setText("ans="+lastValue);
+            lastValue=null;
+            expression.clear();
+        }
+        expression.addToExpression(s);
+        exprField.setText(expression.toString());
 
     }
 
