@@ -120,6 +120,29 @@ public class Expression {
     //Метод служит для удаления элемента из выражения
     public void removeFromExpression() {
 
+        //Из пустого выражения нельзя ничего удалить
+        if(e.size()==1)return;
+
+        //Получаем последний элемент выражения и узнаем его тип
+        String s=e.pollLast();
+        int typeLast=getTypeElement(s);
+
+        //В зависимости от типа элемента производим его удаление
+        if(typeLast==OPEN_BRACKET){
+            if(getTypeElement(e.peekLast())==FUNC)e.pollLast();
+            bracketsCount--;
+            return;
+        }
+
+        if(typeLast==CLOSE_BRACKET){
+            bracketsCount++;
+            return;
+        }
+
+        if(typeLast==NUMBER){
+
+        }
+
     }
 
     //Служит для вычисления значения выражения
@@ -129,7 +152,9 @@ public class Expression {
 
     //Метод служит для полной очистки выражения. Вызвращает пустую строку
     public void clear() {
-
+        e.clear();
+        e.add("_start");
+        bracketsCount=0;
     }
 
     //Возвращает тип переданного ему аргумента
