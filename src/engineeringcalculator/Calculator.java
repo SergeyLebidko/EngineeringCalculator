@@ -1,5 +1,7 @@
 package engineeringcalculator;
 
+import java.util.LinkedList;
+
 //Класс необходим для вычисления значений выражений
 public class Calculator {
 
@@ -12,8 +14,8 @@ public class Calculator {
     }
 
     //Метод вычисляет переданное ему выражение
-    /*public double Calculate(){
-
-    }*/
+    public double Calculate(LinkedList<String> e) throws Exception{
+        return 123.456;    //Фиктивный возврат результата
+    }
 
 }

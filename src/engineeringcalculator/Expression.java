@@ -140,13 +140,38 @@ public class Expression {
         }
 
         if(typeLast==NUMBER){
-
+            if(s.length()>0){
+                s=s.substring(0,s.length()-1);
+            }
+            if(s.length()>0)e.add(s);
         }
 
     }
 
     //Служит для вычисления значения выражения
     public void calculateExpression() throws Exception{
+
+        //Проверка возможности вычислить выражение
+        int typeLast=getTypeElement(e.peekLast());
+        if(typeLast==START)throw new Exception("Введите выражение");
+        if((typeLast!=CLOSE_BRACKET) & (typeLast!=NUMBER) & (typeLast!=CONST))throw new Exception("Выражение не завершено...");
+        if(bracketsCount!=0)throw new Exception("Закройте незакрытые скобки");
+
+        try {
+            double result;
+            LinkedList<String> c;
+            c=new LinkedList<>(e);
+            c.pollFirst();
+            result=calculator.Calculate(new LinkedList<>(c));
+            e.clear();
+            if(result==Math.round(result)){
+                e.add((""+result).substring(0,(""+result).indexOf(".")));
+                return;
+            }
+            e.add(""+result);
+        }catch(Exception e){
+            throw e;
+        }
 
     }
 
@@ -177,11 +202,11 @@ public class Expression {
         }catch (Exception e){}
 
         for (String[] f: functions.getFuncNames()){
-            if (s.toLowerCase().equals(f[0]))return FUNC;
+            if (s.equals(f[0]))return FUNC;
         }
 
         for (String[] c: constants.getConstNames()){
-            if(s.toLowerCase().equals(c[0]))return CONST;
+            if(s.equals(c[0]))return CONST;
         }
 
         return UNKNOWN;
