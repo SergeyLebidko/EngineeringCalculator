@@ -9,7 +9,7 @@ public class Constants {
     };
 
     //Метод, возвращающий значение константы по её имени
-    public double execute(String constName) throws Exception {
+    public double getValue(String constName) throws Exception {
         constName=constName.toLowerCase();
         switch (constName){
             case "pi": return pi();

@@ -1,5 +1,6 @@
 package engineeringcalculator;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 //Класс необходим для разбиения вводимого выражения на отдельные элементы и логического контроля ввода
@@ -7,7 +8,6 @@ public class Expression {
 
     private final Functions functions;
     private final Constants constants;
-    private final Calculator calculator;
 
     private LinkedList<String> e;    //Стек для хранения выражения
 
@@ -39,7 +39,6 @@ public class Expression {
     public Expression(Functions functions, Constants constants) {
         this.functions = functions;
         this.constants = constants;
-        calculator = new Calculator(functions, constants);
         e=new LinkedList<>();
         e.add("_start");
     }
@@ -157,21 +156,34 @@ public class Expression {
         if((typeLast!=CLOSE_BRACKET) & (typeLast!=NUMBER) & (typeLast!=CONST))throw new Exception("Выражение не завершено...");
         if(bracketsCount!=0)throw new Exception("Закройте незакрытые скобки");
 
-        try {
-            double result;
-            LinkedList<String> c;
-            c=new LinkedList<>(e);
-            c.pollFirst();
-            result=calculator.Calculate(new LinkedList<>(c));
-            e.clear();
-            if(result==Math.round(result)){
-                e.add((""+result).substring(0,(""+result).indexOf(".")));
-                return;
-            }
-            e.add(""+result);
-        }catch(Exception e){
-            throw e;
+        //Создаем вспомогательный массив, с которым будем работать при вычислении значения
+        ArrayList<String> a=new ArrayList<>(e);
+
+        //Первый этап - замена имен констант их значениями
+        for (int i=0;i<a.size();i++)if(getTypeElement(a.get(i))==CONST)a.set(i,(""+constants.getValue(a.get(i))));
+
+        //Второй этап - итеративное вычисление значения
+        while (true){
+
+            //Замена унарных минусов на отрицательные числа
+
+            //Удаление пар скобок, внутри которых содержатся одиночные числа
+
+            //Вычисление значений функций
+
+            //Проверка условия выхода из цикла: выражение должно сократиться до одного числа - оно и будет результатом вычисления
+
+            //Поиск операции с наивысшим рангом
+
+            //Вычисление результата наиболее высокоранговой операции
+
+            break;
+
         }
+
+        //Отбрасывание лишних нулей после запятой в случае получения результата, являющегося целым числом
+
+        //Запись результата в выражение
 
     }
 
