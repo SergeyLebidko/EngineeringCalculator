@@ -163,12 +163,43 @@ public class Expression {
         for (int i=0;i<a.size();i++)if(getTypeElement(a.get(i))==CONST)a.set(i,(""+constants.getValue(a.get(i))));
 
         //Второй этап - итеративное вычисление значения
-        System.out.println("Начало вычисления выражения");
         while (true){
 
             //Замена унарных минусов на отрицательные числа
+            int typeLeft, typeRight;
+            boolean minusBit=false;
+            boolean bracketsBit=false;
+            while (!(minusBit | bracketsBit)){
+                minusBit=false;
+                bracketsBit=false;
+                for (int i=1;i<(a.size()-1);i++){
+                    if(getTypeElement(a.get(i))!=MINUS)continue;
+                    typeLeft=getTypeElement(a.get(i-1));
+                    typeRight=getTypeElement(a.get(i+1));
+                    if(((typeLeft==START) & (typeRight==NUMBER)) | ((typeLeft==OPEN_BRACKET) & (typeRight==NUMBER))){
+                        double d=(-1)*Double.parseDouble(a.get(i+1));
+                        a.set(i,(""+d));
+                        a.remove(i+1);
+                        minusBit=true;
+                    }
+                }
 
-            //Удаление пар скобок, внутри которых содержатся одиночные числа
+                //Удаление пар скобок, внутри которых содержатся одиночные числа
+                for (int i=1;i<(a.size()-1);i++){
+                    if(getTypeElement(a.get(i))!=NUMBER)continue;
+                    typeLeft=getTypeElement(a.get(i-1));
+                    typeRight=getTypeElement(a.get(i+1));
+                    if((typeLeft==OPEN_BRACKET) & (typeRight==CLOSE_BRACKET)){
+                        a.remove(i+1);
+                        a.remove(i-1);
+                        i-=2;
+                        bracketsBit=true;
+                    }
+                }
+            }
+
+
+            System.out.println("После удаления унарных минусов и сворачивания скобок: "+a.toString());
 
             //Вычисление значений функций. В данном месте возможно появление исключения для функций, аргумент которых оказался некорректен
 
