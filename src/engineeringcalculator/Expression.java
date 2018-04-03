@@ -85,13 +85,11 @@ public class Expression {
                     e.add("0.");
                     return;
                 }
-                if (s.equals("0")) {
-                    e.add("0.");
-                    return;
-                }
                 e.add(s);
             }
             if (typeLast == NUMBER) {
+                if ((e.peekLast()+s).equals("00"))return;
+                if (e.peekLast().equals("0") & !s.equals("."))return;
                 try {
                     Double.parseDouble(e.peekLast() + s);
                 } catch (Exception e) {
@@ -272,6 +270,7 @@ public class Expression {
                         break;
                     }
                     case "/":{
+                        if(arg2==0)throw new Exception("Деление на ноль!");
                         result=arg1/arg2;
                         break;
                     }
